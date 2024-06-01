@@ -12,9 +12,12 @@ const KakaoMap = () => {
 	useEffect(() => {
 		if (!map) return;
 
-		const data = require("/public/result.json");
-		setData(data);
-	}, [map, data]);
+		fetch(process.env.NEXT_PUBLIC_DATA_URL)
+			.then((res) => res.json())
+			.then((data) => {
+				return setData(data);
+			});
+	}, [map]);
 
 	return (
 		<>
