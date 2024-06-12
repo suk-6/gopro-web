@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Map } from "react-kakao-maps-sdk";
-import { Slide, ToastContainer } from "react-toastify";
+import { Slide, ToastContainer, toast } from "react-toastify";
 import { Road } from "./road";
 import { DataModel } from "@/models/data";
 
@@ -17,9 +17,17 @@ const KakaoMap = () => {
 
 		fetch(process.env.NEXT_PUBLIC_DATA_URL)
 			.then((res) => res.json())
-			.then((data) => {
-				return setData(data);
-			});
+			.then(setData)
+			.then(() =>
+				toast.info("Data loaded", {
+					position: "bottom-right",
+					autoClose: 3000,
+					hideProgressBar: true,
+					progress: 0,
+					theme: "light",
+					transition: Slide,
+				})
+			);
 	}, [map]);
 
 	return (
