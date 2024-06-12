@@ -1,5 +1,6 @@
 import { Point } from "@/models/data";
 import { Polyline } from "react-kakao-maps-sdk";
+import { Slide, toast } from "react-toastify";
 
 interface RoadSegmentProps {
 	points: Point[];
@@ -35,7 +36,17 @@ export const RoadSegment = ({ points, video }: RoadSegmentProps) => {
 			strokeColor={randomColor}
 			strokeOpacity={0.8}
 			onClick={() => {
-				console.log(video);
+				toast.info(video, {
+					position: "bottom-right",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: 0,
+					theme: "light",
+					transition: Slide,
+				});
 			}}
 		/>
 	);
